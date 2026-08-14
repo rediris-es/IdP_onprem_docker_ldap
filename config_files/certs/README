@@ -1,0 +1,5 @@
+Incluir certificados SSL para NGINX en este directorio con los nombres:
+- cert_web.crt
+- cert_web.key
+
+Se adjuntan unos certificados autofirmados de prueba para el CN idp.prueba.test

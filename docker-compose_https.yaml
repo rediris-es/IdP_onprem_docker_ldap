@@ -1,8 +1,8 @@
 services:
   nginx:
-    image: ghcr.io/rediris-es/idp-onprem-docker-ldap/frontend-sso-ssp:2.4.3
+    image: ghcr.io/rediris-es/idp-onprem-docker-ldap/frontend-sso-ssp-https:2.4.3
     ports:
-      - "8082:80"
+      - "443:443"
     volumes:
       - ./config_files/certs:/certs/
     depends_on:
@@ -10,7 +10,7 @@ services:
     container_name: sso_frontend
     restart: always
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://127.0.0.1/simplesaml"]
+      test: ["CMD", "curl", "-f", "https://127.0.0.1/simplesaml"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -23,7 +23,7 @@ services:
           cpus: "1.0"
           memory: "1G"
     env_file:
-      - ./config_files/config_front.env
+      - ./config_files/config_front_https.env
     logging:
       driver: "json-file"
       options:
@@ -55,7 +55,7 @@ services:
           cpus: "2.0"
           memory: "1G"
     env_file:
-      - ./config_files/config_back.env
+      - ./config_files/config_back_https.env
     logging:
       driver: "json-file"
       options:
